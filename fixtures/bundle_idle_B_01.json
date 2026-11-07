@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "run_id": "00000000-0000-4000-8000-00000000b001",
+  "scenario": "idle_10m",
+  "condition": "B",
+  "label": "FAKE battery-saver-on",
+  "started_utc": "2030-01-01T11:00:00+00:00",
+  "duration_s": 600.0,
+  "machine": {"id_hash": "FAKEMACHINE0001", "os_build": "10.0.00000", "cpu": "Fake CPU 9000", "logical_cpus": 8},
+  "power": {"on_ac": false, "battery_saver": true, "plan_guid": "00000000-0000-0000-0000-000000000000", "start_pct": 88, "end_pct": 88},
+  "quality": {"dropped_events": 0, "sampler_gaps_s": 0, "gates_passed": true},
+  "processes": [
+    {"name": "fakeapp.exe", "pid": 3333, "cpu_samples": 80, "cpu_ms": 80.0, "context_switches": 400, "wakeups": 150}
+  ],
+  "battery_samples": [
+    {"t_s": 0.0, "discharge_mw": 6000, "remaining_mwh": 39000},
+    {"t_s": 20.0, "discharge_mw": 6000, "remaining_mwh": 38990}
+  ]
+}

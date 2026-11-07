@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "run_id": "not-a-uuid",
+  "scenario": "idle_10m",
+  "condition": "A",
+  "label": "FAKE invalid: negative cpu_ms, zero duration, bad pct",
+  "started_utc": "2030-01-01T10:00:00Z",
+  "duration_s": 0,
+  "machine": {"id_hash": "FAKEMACHINE0001", "os_build": "10.0.00000", "cpu": "Fake CPU 9000", "logical_cpus": 8},
+  "power": {"on_ac": false, "battery_saver": false, "plan_guid": "x", "start_pct": 150, "end_pct": 89},
+  "quality": {"dropped_events": 0, "sampler_gaps_s": 0, "gates_passed": true},
+  "processes": [
+    {"name": "fakeapp.exe", "pid": 1, "cpu_samples": 1, "cpu_ms": -5.0, "context_switches": 1, "wakeups": 1}
+  ],
+  "battery_samples": []
+}

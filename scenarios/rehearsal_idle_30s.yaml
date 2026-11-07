@@ -1,0 +1,18 @@
+# Short rehearsal of the experiment harness. NOT real data: separate scenario name so it
+# never mixes into the idle_10m statistics. 4 runs x 30 s, one Battery Saver toggle expected.
+scenario: rehearsal_idle_30s
+duration_s: 30
+conditions:
+  A: { label: battery-saver-off, battery_saver: off }
+  B: { label: battery-saver-on, battery_saver: on }
+runs_per_condition: 2
+warmup_runs: 0
+seed: 7
+cooldown_s: 10
+settle_s: 5
+min_start_pct: 70   # rehearsal only (4 x 30 s uses about 1% battery); the real plans keep 80
+abort_pct: 25
+max_retries_per_slot: 1
+manual_workload: false
+# ~20 MB of ETL per 30 s of capture: keep only the newest 2 for WPA spot-checks, delete the rest once the bundle is valid.
+etl_retention: { mode: keep_last, keep: 2 }

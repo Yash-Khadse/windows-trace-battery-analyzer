@@ -1,0 +1,32 @@
+# Isolated Postgres for WTBA only. Does NOT touch any other PostgreSQL on this machine.
+# Bound to localhost:5433; data lives in the named volume "wtba_pgdata".
+name: wtba
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: wtba-db
+    restart: "no"
+    environment:
+      POSTGRES_DB: ${WTBA_DB_NAME:-wtba}
+      # Bootstrap superuser: separate from the app roles, used only by init scripts.
+      POSTGRES_USER: ${WTBA_DB_ADMIN_USER:-wtba_admin}
+      POSTGRES_PASSWORD: ${WTBA_DB_ADMIN_PASSWORD:?set WTBA_DB_ADMIN_PASSWORD in .env}
+      # App roles, created by init/01-roles.sh (non-superuser)
+      WTBA_DB_USER: ${WTBA_DB_USER:-wtba_rw}
+      WTBA_DB_PASSWORD: ${WTBA_DB_PASSWORD:?set WTBA_DB_PASSWORD in .env}
+      WTBA_DB_RO_USER: ${WTBA_DB_RO_USER:-wtba_ro}
+      WTBA_DB_RO_PASSWORD: ${WTBA_DB_RO_PASSWORD:?set WTBA_DB_RO_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${WTBA_DB_PORT:-5433}:5432"
+    volumes:
+      - wtba_pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  wtba_pgdata:

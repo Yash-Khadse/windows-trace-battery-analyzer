@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "run_id": "00000000-0000-4000-8000-00000000a002",
+  "scenario": "edge_video_5m",
+  "condition": "A",
+  "label": "FAKE pii-test C:\\Users\\FakePerson\\Desktop\\run",
+  "started_utc": "2030-01-02T10:00:00Z",
+  "duration_s": 300.0,
+  "machine": {"id_hash": "FAKEMACHINE0002", "os_build": "10.0.00000", "cpu": "Fake CPU 9000", "logical_cpus": 8},
+  "power": {"on_ac": false, "battery_saver": false, "plan_guid": "00000000-0000-0000-0000-000000000000", "start_pct": 95, "end_pct": 93},
+  "quality": {"dropped_events": 2, "sampler_gaps_s": 0.5, "gates_passed": true},
+  "processes": [
+    {"name": "C:\\Users\\FakePerson\\AppData\\Local\\fake\\fakebrowser.exe", "pid": 4444, "cpu_samples": 300, "cpu_ms": 300.0, "context_switches": 2000, "wakeups": 900}
+  ],
+  "battery_samples": [
+    {"t_s": 30.0, "discharge_mw": 12000, "remaining_mwh": 41000}
+  ]
+}

@@ -1,0 +1,52 @@
+[project]
+name = "wtba-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Yash Khadse" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.162.2",
+    "psycopg[binary]>=3.3.8",
+    "sqlalchemy>=2",
+    "uvicorn[standard]>=0.54.0",
+    "wtba",
+]
+
+[project.scripts]
+wtba-api = "wtba_api:main"
+
+[build-system]
+requires = ["uv_build>=0.12.2,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+wtba = { path = "../pipeline", editable = true }
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: timing-sensitive test (deselect with -m \"not slow\")"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "N"]
+
+[tool.mypy]
+strict = true
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["wtba", "wtba.*"]
+follow_untyped_imports = true

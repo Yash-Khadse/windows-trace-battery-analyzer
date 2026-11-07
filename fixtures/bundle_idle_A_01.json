@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "run_id": "00000000-0000-4000-8000-00000000a001",
+  "scenario": "idle_10m",
+  "condition": "A",
+  "label": "FAKE battery-saver-off",
+  "started_utc": "2030-01-01T10:00:00Z",
+  "duration_s": 600.0,
+  "machine": {"id_hash": "FAKEMACHINE0001", "os_build": "10.0.00000", "cpu": "Fake CPU 9000", "logical_cpus": 8},
+  "power": {"on_ac": false, "battery_saver": false, "plan_guid": "00000000-0000-0000-0000-000000000000", "start_pct": 90, "end_pct": 89},
+  "quality": {"dropped_events": 0, "sampler_gaps_s": 0, "gates_passed": true},
+  "processes": [
+    {"name": "fakeapp.exe", "pid": 1111, "cpu_samples": 100, "cpu_ms": 100.0, "context_switches": 500, "wakeups": 200},
+    {"name": "fakeapp.exe", "pid": 1112, "cpu_samples": 50, "cpu_ms": 50.0, "context_switches": 100, "wakeups": 40},
+    {"name": "fakesvc.exe", "pid": 2222, "cpu_samples": 10, "cpu_ms": 10.0, "context_switches": 60, "wakeups": 30}
+  ],
+  "battery_samples": [
+    {"t_s": 0.0, "discharge_mw": 9999, "remaining_mwh": 40000},
+    {"t_s": 10.0, "discharge_mw": 7000, "remaining_mwh": 39990},
+    {"t_s": 15.0, "discharge_mw": 8000, "remaining_mwh": 39980}
+  ]
+}

@@ -1,0 +1,16 @@
+scenario: idle_10m
+duration_s: 600
+conditions:
+  A: { label: battery-saver-off, battery_saver: off }
+  B: { label: battery-saver-on, battery_saver: on }
+runs_per_condition: 10
+warmup_runs: 1
+seed: 20260101
+cooldown_s: 60
+settle_s: 30
+min_start_pct: 80
+abort_pct: 25
+max_retries_per_slot: 2
+manual_workload: false
+# ~20 MB of ETL per 30 s of capture: keep only the newest 2 for WPA spot-checks, delete the rest once the bundle is valid.
+etl_retention: { mode: keep_last, keep: 2 }

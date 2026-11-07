@@ -1,0 +1,39 @@
+[project]
+name = "wtba"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Yash Khadse" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "alembic>=1.20.1",
+    "jsonschema>=4.26.0",
+    "numpy>=2.4.6",
+    "pandas>=3.1.1",
+    "psycopg[binary]>=3.3.8",
+    "pyyaml>=6.0.3",
+    "scipy>=1.17.1",
+    "sqlalchemy>=2",
+    "typer>=0.28.0",
+]
+
+[project.scripts]
+wtba = "wtba.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.12.2,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.170.15",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.4",
+]
+
+[[tool.mypy.overrides]]
+module = ["jsonschema", "jsonschema.*"]
+ignore_missing_imports = true

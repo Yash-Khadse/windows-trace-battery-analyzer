@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "wtba-run-bundle-v1",
+  "title": "WTBA run bundle v1 (collector -> pipeline contract)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run_id", "scenario", "condition", "label", "started_utc", "duration_s", "machine", "power", "quality", "processes", "battery_samples"],
+  "properties": {
+    "schema": {"const": 1},
+    "run_id": {"type": "string", "format": "uuid", "maxLength": 64},
+    "scenario": {"type": "string", "minLength": 1, "maxLength": 128},
+    "condition": {"enum": ["A", "B"]},
+    "label": {"type": "string", "maxLength": 256},
+    "started_utc": {"type": "string", "format": "date-time", "maxLength": 64},
+    "duration_s": {"type": "number", "exclusiveMinimum": 0},
+    "machine": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id_hash", "os_build", "cpu", "logical_cpus"],
+      "properties": {
+        "id_hash": {"type": "string", "minLength": 8, "maxLength": 128},
+        "os_build": {"type": "string", "maxLength": 64},
+        "cpu": {"type": "string", "maxLength": 256},
+        "logical_cpus": {"type": "integer", "minimum": 1}
+      }
+    },
+    "power": {
+      "type": "object", "additionalProperties": false,
+      "required": ["on_ac", "battery_saver", "plan_guid", "start_pct", "end_pct"],
+      "properties": {
+        "on_ac": {"type": "boolean"},
+        "battery_saver": {"type": "boolean"},
+        "plan_guid": {"type": "string", "maxLength": 64},
+        "start_pct": {"type": "integer", "minimum": 0, "maximum": 100},
+        "end_pct": {"type": "integer", "minimum": 0, "maximum": 100}
+      }
+    },
+    "quality": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dropped_events", "sampler_gaps_s", "gates_passed"],
+      "properties": {
+        "dropped_events": {"type": "integer", "minimum": 0},
+        "sampler_gaps_s": {"type": "number", "minimum": 0},
+        "gates_passed": {"type": "boolean"}
+      }
+    },
+    "processes": {
+      "type": "array", "maxItems": 20000,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "pid", "cpu_samples", "cpu_ms", "context_switches", "wakeups"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1, "maxLength": 256},
+          "pid": {"type": "integer", "minimum": 0},
+          "cpu_samples": {"type": "integer", "minimum": 0},
+          "cpu_ms": {"type": "number", "minimum": 0},
+          "context_switches": {"type": "integer", "minimum": 0},
+          "wakeups": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "battery_samples": {
+      "type": "array", "maxItems": 20000,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["t_s", "discharge_mw", "remaining_mwh"],
+        "properties": {
+          "t_s": {"type": "number", "minimum": 0},
+          "discharge_mw": {"type": "number"},
+          "remaining_mwh": {"type": "number", "minimum": 0}
+        }
+      }
+    }
+  }
+}

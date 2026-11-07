@@ -1,0 +1,10 @@
+title = "WTBA gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Template placeholders only"
+paths = [
+  '''\.env\.example$''',
+]

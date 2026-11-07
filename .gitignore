@@ -1,0 +1,64 @@
+# ---- PRIVACY: traces and raw telemetry must NEVER be committed ----
+data/
+runs/
+*.etl
+*.etl.*
+*.etl.zip
+*.evtx
+*.dmp
+*.wpaProfile.local
+raw/
+exports/
+energy-report*.html
+battery-report*.html
+battery-report*.xml
+typeperf-*.csv
+
+# ---- personal job-search notes must never be published (job id, resume notes) ----
+Microsoft_WDF_Project_Plan.md
+
+# ---- secrets ----
+.env
+.env.*
+!.env.example
+!web/.env.mocks
+*.pem
+*.key
+*.pfx
+secrets/
+
+# ---- .NET ----
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+*.nupkg
+
+# ---- Python ----
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# ---- Node / web ----
+node_modules/
+dist/
+.vite/
+playwright-report/
+test-results/
+
+# ---- Docker volumes / local db ----
+db/pgdata/
+
+# ---- editor / OS ----
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini
+*.log
